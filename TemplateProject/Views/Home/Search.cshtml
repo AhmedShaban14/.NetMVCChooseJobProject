@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TemplateProject.Models.Job>
+@using TemplateProject.Models;
+@using Microsoft.AspNet.Identity;
+@if (Model != null)
+{
+    <div class="alert alert-danger">
+    @ViewBag.Message
+    </div>
+   foreach (var sub in Model)
+    {
+        <div class="col-md-3 card img-thumbnail" style="margin-left:10px;margin-top:10px">
+            <img src="~/Uploads/@sub.JobImage" class="img-fluid" style="width:100%;height:300px" />
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => sub.JobTitle)</h5>
+                <p class="card-text">@Html.DisplayFor(modelItem => sub.JobContent)</p>
+                @{
+                    var userId = User.Identity.GetUserId();
+                    var db = new ApplicationDbContext();
+                    var currentUser = db.Users.Where(x => x.Id == userId).SingleOrDefault();
+                    if (currentUser != null)
+                    {
+                        if (currentUser.RoleType == "Appliers")
+                        {
+                            <a href="@Url.Action("Details","Home",new { id=sub.Id})" class="btn btn-primary btn-block">Go To Details</a>
+                        }
+                    }
+                }
+
+            </div>
+        </div>
+                    }
+}
+

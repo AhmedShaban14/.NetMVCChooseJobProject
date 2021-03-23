@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TemplateProject.Models.ApplyJob>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.JobContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job.JobTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job.JobContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditOfJob", new {  id=item.Id  }) |
+            @Html.ActionLink("Details", "DetailsOfJob", new {  id=item.Id  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
+        </td>
+    </tr>
+}
+</table>

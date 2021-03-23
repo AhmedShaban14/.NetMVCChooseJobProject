@@ -1,0 +1,53 @@
+﻿@model TemplateProject.Models.Category
+<form id="myForm">
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.catDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.catDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.catDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+    </div>
+</form>
+<hr />
+<button type="button" class="btn btn-primary" id="saveBtn">Save changes</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#saveBtn").click(function () {
+            var data = $("#myForm").serialize();
+            debugger
+            $.ajax({
+                type: "POST",
+                url: "/Category/Create",
+                data: data,
+                success: function (response) {
+                    if (response.result == 1) {
+                        alert("Done Well ha");
+                        var urls = '@Url.Action("Index", "Category")';
+                        window.location.href = urls.replace();
+                    }
+                    else {
+                        alert("failed");
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+

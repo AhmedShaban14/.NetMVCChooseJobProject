@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity
+@using TemplateProject.Models;
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="navbar-nav ml-auto">
+            @{
+                var userId = User.Identity.GetUserId();
+                var db = new ApplicationDbContext();
+                var currentUser = db.Users.SingleOrDefault(x => x.Id == userId);
+            }
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                    Welcome : @currentUser.UserName
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdownContainer">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <i class="userImage fas fa-home"></i>
+                            </div>
+                            <div class="col-lg-8">
+                                <strong> @currentUser.UserName</strong>
+                                @if (currentUser.RoleType == "Appliers")
+                                {
+                                    <a class="mt-2 btn btn-success" href="@Url.Action("GetAllJobsForSpecificUser","Home")">Show Here Appliers</a>
+                                }
+                                else if (currentUser.RoleType == "Publishers")
+                                {
+                                    <a class="mt-2 btn btn-success" href="@Url.Action("GetAllJobsForSpecificPublisher","Home")">Show My Publishers</a>
+                                }
+                                <a class="mt-2 btn btn-warning" href="@Url.Action("EditProfile","Account")">Edit My Profile Data </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="btn btn-danger btn-block" href="javascript:document.getElementById('logoff').submit()">Log Off </a>
+
+
+                </div>
+            </li>
+
+
+            @*    <a class="nav-link" href="javascript:document.getElementById('logoff').submit()">Log Off </a>*@
+        </ul>
+                    }
+                }
+
+                @*@using Microsoft.AspNet.Identity
+                    @if (Request.IsAuthenticated)
+                    {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <ul class="navbar-nav ml-auto">
+                                <li>
+                                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li>
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            </ul>
+                        }
+                    }*@
+else
+{
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/Login">
+                <i class="fas fa-lock"></i> Login
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/Register">
+                <i class="fas fa-registered"></i> Register
+            </a>
+        </li>
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+    </ul>
+}

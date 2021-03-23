@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <div class="row>
+                <div class="col-3">
+                    <a class="navbar-brand" href="/Home/Index">
+                        <img class="img-thumbnail myImg" src="~/Images/best_since_day_one_by_daxxdzn-d7kta2i.png" />
+                        JOBS
+                    </a>
+                </div> 
+                <div class="col-9">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav d-flex mr-auto ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Home/Index">
+                                    <i class="fas fa-home"></i>
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ContactUs","Home")">
+                                    <i class="fas fa-envelope-square"></i>
+                                    Contact Us
+                                </a>
+                            </li>
+                            <li class="nav-item text-right">
+                                <a id="navLink" href="#">
+                                    @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                                    {
+                                        @Html.TextBox("text", null, new { @class = "SearchHere form-control ", placeholder = "Search Here" })
+                                    }
+                                </a>
+                            </li>
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div style="min-height:550px" class="mt-5">
+            @RenderBody()
+        </div>
+
+        <hr />
+        <!--Footer-->
+        <footer class="fixeds">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>
+                        Her's is our new things
+                    </h3>
+                    <p>
+                        lorem1v
+                        lorem1v
+                        lorem1v
+                        lorem1v
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        Her's is our new things
+                    </h3>
+                    <p>
+                        lorem1v
+                        lorem1v
+                        lorem1v
+                        lorem1v
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        Her's is our new things
+                    </h3>
+                    <p>
+                        lorem1v
+                        lorem1v
+                        lorem1v
+                        lorem1v
+                    </p>
+                </div>
+            </div>
+            <div class="text-center mainFooter">
+                <p>&copy; @DateTime.Now.Year - My Template From Scratch</p>
+            </div>
+
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

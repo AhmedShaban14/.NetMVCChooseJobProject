@@ -1,0 +1,44 @@
+﻿@model TemplateProject.Models.ApplyJob
+
+<div >
+    <h4>ApplyJob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Job.JobTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job.JobTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayFor(modelItem => modelItem.Job.JobContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => modelItem.Job.JobContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

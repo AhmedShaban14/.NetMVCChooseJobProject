@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TemplateProject.Models.Category>
+@using TemplateProject.Models;
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card alert-info">
+    <h2 class="card-body">Welcome To Our Main Page</h2>
+    <h4 class="card-body" >All Categories And It's Projects</h4>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="img-thumbnail navbar bg-dark" style="color:antiquewhite;padding:20px;margin-top:20px"><h3>@Html.DisplayFor(modelItem => item.Name)</h3></div>
+    <div class="navbar bg-light"><h5>@Html.DisplayFor(modelItem => item.catDescription)</h5></div>
+    if (item.Jobs != null)
+    {
+        <div class="container">
+            <div class="row">
+                @foreach (var sub in item.Jobs)
+                {
+                    <div class="col-sm-4 card img-thumbnail text-center" style="margin-bottom: 15px">
+                        <img src="~/Uploads/@sub.JobImage" class="img-fluid" style="width:400px;height:200px" />
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => sub.JobTitle)</h5>
+                            <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelItem => sub.JobContent).ToString()))</p>
+                            @{
+                                var userId = User.Identity.GetUserId();
+                                var db = new ApplicationDbContext();
+                                var currentUser = db.Users.Where(x => x.Id == userId).SingleOrDefault();
+                                if (currentUser != null)
+                                {
+                                    if (currentUser.RoleType == "Appliers")
+                                    {
+                                        <a href="@Url.Action("Details","Home",new { id=sub.Id})" class="btn btn-primary btn-block">Go To Details</a>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                                }
+            </div>
+        </div>
+                                }
+                                else
+                                {
+        <div class="alert alert-danger">Errrrrrror</div>
+    }
+}

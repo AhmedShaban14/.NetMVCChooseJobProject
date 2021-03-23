@@ -1,0 +1,44 @@
+﻿@model TemplateProject.Models.Job
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobImage)
+        </dt>
+
+        <dd>
+            <img src="~/Uploads/@Model.JobImage" class="img-thumbnail" style="width:300px;height:300px" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Apply Job", "Apply", new { id = Model.Id },new { @class="btn btn-success"}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
